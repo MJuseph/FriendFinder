@@ -8,7 +8,79 @@
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <link rel="stylesheet" href="./assets/style/style.css">
 </head>
+<style>
+/* Home style start */
+body{
+    background-image: url("assets/imgs/bkgrnd.jpg")
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(243, 217, 220);
+    font-family: "Sofia";
+    font-size: 30px;
+    margin-right: 320px;
+    margin-left: 320px;
+    border-radius: 15px;
+    padding: 50px;
+    color: #337ab7;
+}
+button{
+    cursor: pointer;
+    background-color: #337ab7;
+    font-size: 22px;
+    padding: 10px;
+    color: white;
+    border-radius: 15px;
+    border: 5px solid #337ab7;
+}
+footer.home{
+    font-size: 20px;
+}
+/* Home style end */
 
+/* >>>>>>>>>>>>>>>> */
+
+/* Survey style start */
+.sur{
+    background-color: rgb(243, 217, 220);
+    padding: 20px;
+}
+.surveyContainer{
+    font-family: "Sofia";
+    font-size: 25px;
+    color: #337ab7;
+    padding-left: 100px; 
+}
+input{
+    border-radius: 20px;
+    width: 1250px;
+    height: 30px;
+    border: 5px solid #337ab7;
+    background-color: #337ab7;
+    color: rgb(243, 217, 220);
+    font-size: 30px;
+    text-align: center;
+}
+select {
+    cursor: pointer;
+    width: 400px;
+    height: 30px;;
+    font-family: "Sofia";
+    font-weight: bold;
+    color: white;
+    background-color: #337ab7;
+    border-radius: 20px;
+    border: 5px solid #337ab7;    
+}
+
+.subButton{
+    width: 1250px;
+    border-color: #337ab7;
+}
+/* Survey style end */
+</style>
 <body background="./assets/imgs/bkgrnd.jpg">
     <div class="container">
         <div class="subContainer">
@@ -23,7 +95,7 @@
                 Then find the friend with the greatest compatibility!
             </h3>
             <div class="homeButton">
-                <a href="./survey.html">
+                <a href="./survey">
                 <button class="surveyButton">
                      📝 Go to Survey
                 </button>
@@ -34,7 +106,7 @@
     <hr>
     <footer class="home">
             <span class="footerHome">
-                <a href="../app/data/friends.js" target="_blank">
+                <a href="/api/friends" target="_blank">
                     ⌨ API Friends
                 </a>
                  | 

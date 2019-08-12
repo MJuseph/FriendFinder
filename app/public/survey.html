@@ -4,9 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery.js"></script>
     <title>FriendFinder</title>
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <link rel="stylesheet" href="./assets/style/style.css">
+    <style>
+    /* Home style start */
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(243, 217, 220);
+    font-family: "Sofia";
+    font-size: 30px;
+    margin-right: 320px;
+    margin-left: 320px;
+    border-radius: 15px;
+    padding: 50px;
+    color: #337ab7;
+}
+button{
+    cursor: pointer;
+    background-color: #337ab7;
+    font-size: 22px;
+    padding: 10px;
+    color: white;
+    border-radius: 15px;
+    border: 5px solid #337ab7;
+}
+footer.home{
+    font-size: 20px;
+}
+/* Home style end */
+
+/* >>>>>>>>>>>>>>>> */
+
+/* Survey style start */
+.sur{
+    background-color: rgb(243, 217, 220);
+    padding: 20px;
+}
+.surveyContainer{
+    font-family: "Sofia";
+    font-size: 25px;
+    color: #337ab7;
+    padding-left: 100px; 
+}
+input{
+    border-radius: 20px;
+    width: 1250px;
+    height: 30px;
+    border: 5px solid #337ab7;
+    background-color: #337ab7;
+    color: rgb(243, 217, 220);
+    font-size: 30px;
+    text-align: center;
+}
+select {
+    cursor: pointer;
+    width: 400px;
+    height: 30px;;
+    font-family: "Sofia";
+    font-weight: bold;
+    color: white;
+    background-color: #337ab7;
+    border-radius: 20px;
+    border: 5px solid #337ab7;    
+}
+
+.subButton{
+    width: 1250px;
+    border-color: #337ab7;
+}
+/* Survey style end */
+    </style>
 </head>
 <body class="sur">
     <div class="surveyContainer">
@@ -213,7 +284,7 @@
             <hr>
             <footer class="survey">
                 <span class="footerSurvey">
-                    <a href="../app/data/friends.js" target="_blank">
+                    <a href="/api/friends" target="_blank">
                         ⌨ API Friends
                     </a>
                     |
@@ -222,6 +293,73 @@
                     </a>
                 </span>
             </footer>
+
+            <div id="results">
+                    <div><h1>Best Match</h1></div>
+                    <div id="newFriend"></div>
+                    <div id="img"></div>
+                    <div id="txt"></div>
+            </div>
     
 </body>
 </html>
+
+<script type="text/javascript">
+    // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
+    // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
+    // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
+    // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+  
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+  
+      // Here we grab the form elements
+      var newChar = {
+        name: $("#name").val().trim(),
+        photo: $("#photo").val().trim(),
+        score: [ 
+        parseInt( $("#q1").val() ),
+        parseInt( $("#q2").val() ),
+        parseInt( $("#q3").val() ),
+        parseInt( $("#q4").val() ),
+        parseInt( $("#q5").val() ),
+        parseInt( $("#q6").val() ),
+        parseInt( $("#q7").val() ),
+        parseInt( $("#q8").val() ),
+        parseInt( $("#q9").val() ),
+        parseInt( $("#q10").val())
+    ]
+      };
+  
+      console.log(newChar);
+  
+      // This line is the magic. It"s very similar to the standard ajax function we used.
+      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+      // depending on if a tables is available or not.
+  
+      $.post("/api/friends", newChar,
+        function(data) {
+
+  
+          // Clear the form when submitting
+        $("#name").val("");
+        $("#photo").val("");
+        $("#q1").val(""),
+        $("#q2").val(""),
+        $("#q3").val(""),
+        $("#q4").val(""),
+        $("#q5").val(""),
+        $("#q6").val(""),
+        $("#q7").val(""),
+        $("#q8").val(""),
+        $("#q9").val(""),
+        $("#q10").val("")
+  
+        });
+        
+    });
+    $("#results").hide();
+    
+  </script>
+
