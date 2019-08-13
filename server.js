@@ -9,8 +9,11 @@ var app = express();
 var PORT = process.env.PORT || 4444;
 
 // For serving of static CSS
-app.use(express.static(__dirname + "/app/public/assets/style"));
-app.use(express.static(__dirname + "/app/public/assets/imgs"));
+app.use(express.static("app/public"));
+// app.use(express.static("imgs"));
+// app.use(express.static(__dirname + '/public'));
+// app.use("/public", express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + "/app/public/assets/imgs"));
 // Sets up the Express app to handle data parsing
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
