@@ -1,6 +1,7 @@
-var friends = [{
+var friends = [
+  {
     "name":"Ahmed",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    "photo":"https://media.giphy.com/media/1iw6AJrH5NWlofhVrm/giphy.gif",
     "scores":[
         5,
         1,
@@ -13,6 +14,103 @@ var friends = [{
         4,
         1
       ]
-  }]
+  },
+  {
+    "name":"Conan",
+    "photo":"https://media.giphy.com/media/12xWfDQcGkbU1W/giphy.gif",
+    "scores":[
+        4,
+        2,
+        3,
+        5,
+        4,
+        2,
+        1,
+        4,
+        5,
+        1
+      ]
+  },
+  {
+    "name":"Sam",
+    "photo":"https://media.giphy.com/media/3o6Ztfp1T1AukDGP4s/giphy.gif",
+    "scores":[
+        2,
+        4,
+        5,
+        3,
+        2,
+        4,
+        5,
+        2,
+        1,
+        5
+      ]
+  },
+  {
+    "name":"Roy",
+    "photo":"https://media.giphy.com/media/tB083WSscLjqw/giphy.gif",
+    "scores":[
+        1,
+        5,
+        1,
+        2,
+        1,
+        5,
+        5,
+        1,
+        2,
+        4
+      ]
+  },
+  {
+    "name":"Nina",
+    "photo":"https://media.giphy.com/media/l4FGDPCEdKU4wuIQE/giphy.gif",
+    "scores":[
+        3,
+        1,
+        2,
+        4,
+        3,
+        1,
+        5,
+        4,
+        3,
+        3
+      ]
+  },
+  {
+    "name":"Sonia",
+    "photo":"http://giphygifs.s3.amazonaws.com/media/cB2QIQI5UeBsQ/giphy.gif",
+    "scores":[
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+  },
+  {
+    "name":"Hannah",
+    "photo":"https://media.giphy.com/media/j5tKaT44GLeStOKSxX/giphy.gif",
+    "scores":[
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+  }
+]
 
   module.exports = friends;

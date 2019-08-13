@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>FriendFinder</title>
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <link rel="stylesheet" href="./assets/style/style.css">
@@ -76,6 +80,26 @@ select {
     width: 1250px;
     border-color: #337ab7;
 }
+.modal{
+    font-family: "Sofia";
+    color: white;
+    position: fixed;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+    width: 70%;
+    height: 70%;
+    margin: 200px;
+    background-color: #337ab7;
+    border-radius: 20%;
+
+}
+.modal-dialog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Survey style end */
     </style>
 </head>
@@ -294,13 +318,27 @@ select {
                 </span>
             </footer>
 
-            <div id="results">
-                    <div><h1>Best Match</h1></div>
-                    <div id="newFriend"></div>
-                    <div id="img"></div>
-                    <div id="txt"></div>
-            </div>
-    
+      <!-- Modal after survey completion -->
+<div class="modd">
+		<div id="bestFriendModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Your Match is: </h1>
+					</div>
+					<div class="modal-body">
+						<h2 id="bestFriend"></h2>
+						<img id="bestFriendPhoto" src="#">
+					</div>
+					<!-- <div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div> -->
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
 </body>
 </html>
 
@@ -309,35 +347,57 @@ select {
     // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
     // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
     // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
-  
+   
+   
+    $(".modal").hide();
+
+
     $("#submit").on("click", function(event) {
+    $(".modal").show();
       event.preventDefault();
-  
+      var valid = true;
       // Here we grab the form elements
+      if($("#name").val() === "" || $("#photo").val() === "") {
+			valid = false;
+		} else if($("#q1").val() === "empty" || $("#q2").val() === "empty" || $("#q3").val() === "empty" || $("#q4").val() === "empty" || $("#q5").val() === "empty" || $("#q6").val() === "empty" || $("#q7").val() === "empty" || $("#q8").val() === "empty" || $("#q9").val() === "empty" || $("#q10").val() === "empty") {
+			valid = false;
+        }
+        
+        if(valid === true) {
       var newChar = {
         name: $("#name").val().trim(),
         photo: $("#photo").val().trim(),
-        score: [ 
-        parseInt( $("#q1").val() ),
-        parseInt( $("#q2").val() ),
-        parseInt( $("#q3").val() ),
-        parseInt( $("#q4").val() ),
-        parseInt( $("#q5").val() ),
-        parseInt( $("#q6").val() ),
-        parseInt( $("#q7").val() ),
-        parseInt( $("#q8").val() ),
-        parseInt( $("#q9").val() ),
-        parseInt( $("#q10").val())
+        scores: [ 
+        $("#q1").val(),
+        $("#q2").val(),
+        $("#q3").val(),
+        $("#q4").val(),
+        $("#q5").val(),
+        $("#q6").val(),
+        $("#q7").val(),
+        $("#q8").val(),
+        $("#q9").val(),
+        $("#q10").val()
     ]
       };
   
       console.log(newChar);
-  
+      var currentURL = window.location.origin;
       // This line is the magic. It"s very similar to the standard ajax function we used.
       // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
       // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
       // depending on if a tables is available or not.
-  
+  // Ajax call for receiving response after POST req
+  $.post(currentURL + "/api/friends", newChar, function(data) {
+				$("#bestFriend").text(data.name);
+				$("#bestFriendPhoto").attr("src", data.photo);
+				$("#bestFriendModal").modal("toggle");
+			});
+		} else {
+			// If a required field is missing, show alert
+			alert("Survey is incomplete!");
+		}
+	
       $.post("/api/friends", newChar,
         function(data) {
 
@@ -356,10 +416,11 @@ select {
         $("#q9").val(""),
         $("#q10").val("")
   
+        
         });
         
     });
-    $("#results").hide();
+
     
   </script>
 
